@@ -1,0 +1,156 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400..700&family=Pacifico&display=swap');
+
+:root {
+  --border-color: #FF4040;
+  --checkbox-size: 1rem;
+}
+
+.portada {
+    width: 100%;
+    height: 52%;
+    background: url('/img/Portada2.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.txtNuevaTarea {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52%;
+    text-align: center;
+    margin: auto;
+}
+
+#txtNuevaTarea {
+    width: 94%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+#txtNuevaTareaBtn {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #8E44AD;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    outline: none;
+    transform: translate(80%, 0%);
+    text-align: center;
+}
+
+
+.Titulo {
+    padding: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    position: absolute;
+    transform: translate(-21.6%, 105%);
+    width: 100%;
+    font-family: 'Pacifico';
+}
+
+span{
+
+    font-family: 'Montserrat';
+}
+
+.todo-title {
+    font-size: 15px;
+}
+
+.todo-date {
+    font-size: 13px; 
+}
+
+.row{
+    display: flex;
+    width: 100%;
+}
+
+.todo-list-container {
+    position: relative;
+    width: 49%;
+    background: white;
+    padding: 21px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    height: 56%;
+    text-align: center;
+    margin: auto;
+    top: -20%;
+
+}
+
+.todo-task {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    margin: auto;
+}
+
+.todo-task input[type="checkbox"] {
+        margin-right: 1rem;
+        margin-top: 0;
+        accent-color: #8E44AD;
+        width: 1rem;
+        height: 1rem;
+}
+
+/*Botón borrar*/
+
+    .todo-task .btn-light {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s ease;
+    }
+
+    .todo-task .btn-light {
+        background-color: transparent;
+        border: none;
+    }
+
+    .todo-task:hover .btn-light {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .todo-task .btn-light:hover .fa-trash {
+        color: #8E44AD;
+    }
+
+    .todo-task .btn-light .fa-trash {
+        color: #8E44AD;
+    }
+
+
+/*Tachar texto*/
+
+.form-check-input:checked + .todo-title {
+    text-decoration: line-through;
+    text-decoration-color: #8E44AD; /* Color morado para la línea del tachado */
+    text-decoration-thickness: 1.5px; /* Grosor de la línea del tachado */
+    margin-left: 0.5rem;
+}
+

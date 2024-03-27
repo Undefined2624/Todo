@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    Layout = null;
+}
+
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/indexCss.css" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="portada">
+        <div class="Titulo">
+            <h1>To Do</h1>
+        </div>
+        <div class="txtNuevaTarea">
+            <input type="text" id="txtNuevaTarea" placeholder="Crea una nueva tarea ;)">
+            <button id="txtNuevaTareaBtn">+</button>
+        </div>
+    </div>
+
+    <div class="todo-list-container">
+        @foreach (var tarea in Model)
+        {
+            <div class="row todo-task m-lg-0">
+                <div class="col-8 d-flex">
+                    <label class="form-check-label form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="check-@tarea.IdTarea" @(tarea.IsComplete ? "checked" : "") />
+                        <span class="todo-title">@tarea.Titulo</span>
+                    </label>
+                </div>
+                <div class="col-3 d-flex">
+                    <span class="todo-date ml-auto">@tarea.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</span>
+                </div>
+                <div class="col-1 d-flex">
+                <button class="btn btn-light ml-auto" onclick="location.href='@Url.Action("Delete", "Home", new { id = tarea.IdTarea })'">
+                    <i class="fa fa-trash"></i>
+                </button>
+                </div>                
+            </div>        }
+    </div>
+
+
+</body>
+</html>
