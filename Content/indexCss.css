@@ -33,28 +33,24 @@ html, body {
 }
 
 #txtNuevaTarea {
-    width: 94%;
+    width: 100%;
     padding: 15px;
     border: none;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
 }
 
-#txtNuevaTareaBtn {
+#BtnAgregar {
     position: absolute;
-    right: 5px;
-    top: 3px;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     border: none;
     background-color: #8E44AD;
     color: white;
-    font-size: 26px;
-    cursor: pointer;
+    font-size: 32px;
     outline: none;
-    transform: translate(80%, 0%);
-    text-align: center;
+    transform: translate(20%, 0%);
 }
 
 
@@ -90,7 +86,7 @@ span{
 
 .todo-list-container {
     position: relative;
-    width: 49%;
+    width: 52%;
     background: white;
     padding: 21px;
     border-radius: 5px;
@@ -120,28 +116,48 @@ span{
 
 /*Botón borrar*/
 
-    .todo-task .btn-light {
+    .btn-delete {
         visibility: hidden;
         opacity: 0;
         transition: visibility 0s, opacity 0.5s ease;
-    }
-
-    .todo-task .btn-light {
         background-color: transparent;
         border: none;
     }
 
-    .todo-task:hover .btn-light {
+
+    .todo-task:hover .btn-delete {
         visibility: visible;
         opacity: 1;
     }
 
-    .todo-task .btn-light:hover .fa-trash {
+    .todo-task .btn-delete:hover .fa-trash {
         color: #8E44AD;
     }
 
-    .todo-task .btn-light .fa-trash {
+    .todo-task .btn-delete .fa-trash {
         color: #8E44AD;
+    }
+
+    .btn-edit {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s ease;
+        background-color: transparent;
+        border: none;
+    }
+
+
+    .todo-task:hover .btn-edit {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .todo-task .btn-edit:hover .fa-edit {
+        color: #E67E22;
+    }
+
+    .todo-task .btn-edit .fa-edit {
+        color: #E67E22;
     }
 
 
