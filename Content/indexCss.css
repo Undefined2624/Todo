@@ -33,11 +33,13 @@ html, body {
 }
 
 #txtNuevaTarea {
-    width: 100%;
+    width: 86.5%;
     padding: 15px;
     border: none;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    font-size:20px;
+    font-style: italic;
 }
 
 #BtnAgregar {
@@ -50,33 +52,31 @@ html, body {
     color: white;
     font-size: 32px;
     outline: none;
-    transform: translate(20%, 0%);
+    transform: translate(20%, 8%);
 }
 
+.fa-trash{
+    font-size: 16px;
+}
 
 .Titulo {
     padding: 15px;
-    font-size: 30px;
+    font-size: 36px;
     font-weight: bold;
     color: white;
     text-align: center;
     position: absolute;
-    transform: translate(-21.6%, 105%);
+    transform: translate(-16%, 98%);
     width: 100%;
-    font-family: 'Pacifico';
 }
 
-span{
+span, #txtNuevaTarea, .Titulo{
 
     font-family: 'Montserrat';
 }
 
 .todo-title {
-    font-size: 15px;
-}
-
-.todo-date {
-    font-size: 13px; 
+    font-size: 20px;
 }
 
 .row{
@@ -86,7 +86,7 @@ span{
 
 .todo-list-container {
     position: relative;
-    width: 52%;
+    width: 45%;
     background: white;
     padding: 21px;
     border-radius: 5px;

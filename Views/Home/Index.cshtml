@@ -20,7 +20,7 @@
 <body>
     <div class="portada">
         <div class="Titulo">
-            <h1>To Do</h1>
+            <h1>To Do List </h1>
         </div>
         <div class="txtNuevaTarea">
             <input type="text" id="txtNuevaTarea" placeholder="Crea una nueva tarea 📝">
@@ -32,27 +32,63 @@
         @foreach (var tarea in Model)
         {
             <div class="row todo-task m-lg-0">
-                <div class="col-8 d-flex">
+                <div class="col-11 d-flex">
                     <label class="form-check-label form-check-inline">
                         <input type="checkbox" class="form-check-input" id="check-@tarea.IdTarea" @(tarea.IsComplete ? "checked" : "") />
                         <span class="todo-title">@tarea.Titulo</span>
                     </label>
                 </div>
-                <div class="col-2 d-flex">
-                    <span class="todo-date ml-auto">@tarea.FechaCreacion.ToString("dd/MM/yyyy")</span>
-                </div>
-                <div class="col-2 d-flex">
-                    <button class="btn btn-light ml-auto btn-edit" onclick="location.href='@Url.Action("Delete", "Home", new { id = tarea.IdTarea })'">
-                        <i class="fa fa-edit"></i>
-                    </button>
+               
+                <div class="col-1 d-flex">                
                     <button class="btn btn-light ml-auto btn-delete" onclick="location.href='@Url.Action("Delete", "Home", new { id = tarea.IdTarea })'">
                         <i class="fa fa-trash"></i>
                     </button>
-                </div>                
-            </div>   
-          }
+                </div>
+            </div>
+        }
     </div>
 
 
 </body>
 </html>
+
+<script type="text/javascript">
+// Activar el modo de edición al hacer clic en el botón de editar
+$('.btn-edit').on('click', function(e) {
+    e.preventDefault(); // Prevenir la acción por defecto del botón
+
+    var $title = $(this).closest('.todo-task').find('.todo-title'); // Encontrar el elemento del título
+    var currentText = $title.text(); // Obtener el texto actual
+    $title.replaceWith(`<input type="text" class="form-control todo-edit" value="${currentText}"/>`); // Reemplazar por un input
+
+    // Poner el foco en el input y seleccionar el texto
+    var $input = $(this).closest('.todo-task').find('.todo-edit');
+    $input.focus();
+    $input.select();
+
+    // Manejar el evento Enter para guardar los cambios
+    $input.on('keypress', function(e) {
+        if (e.which == 13) { // Código ASCII de Enter
+            var newText = $(this).val(); // Obtener el nuevo texto
+            var taskId = $(this).closest('.todo-task').data('task-id'); // Suponiendo que haya un atributo data-task-id con el ID
+            updateTaskTitle(taskId, newText); // Función para actualizar el título
+        }
+    });
+});
+
+// Función para enviar el nuevo título al servidor
+function updateTaskTitle(taskId, title) {
+    $.ajax({
+        url: '@Url.Action("Edit", "Home")', // Ruta del método del controlador para editar
+        type: 'POST',
+        data: { id: taskId, newTitle: title },
+        success: function(response) {
+            // Manejar la respuesta del servidor
+            // Reemplazar el input por el nuevo título, u otro tipo de notificación
+        },
+        error: function() {
+            // Manejar errores
+        }
+    });
+}
+</script>
