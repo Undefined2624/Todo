@@ -13,7 +13,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>To Do List</title>
 </head>
@@ -24,23 +24,25 @@
         </div>
         <div class="txtNuevaTarea">
             <input type="text" id="txtNuevaTarea" placeholder="Crea una nueva tarea 📝">
-            <button id="BtnAgregar">+</button>
+            <button id="BtnAgregar" onclick="agregarTarea()">+</button>
+
         </div>
     </div>
 
     <div class="todo-list-container">
         @foreach (var tarea in Model)
         {
-            <div class="row todo-task m-lg-0">
+            <div class="row todo-task m-lg-0" id="task-@tarea.IdTarea">
+
                 <div class="col-11 d-flex">
                     <label class="form-check-label form-check-inline">
                         <input type="checkbox" class="form-check-input" id="check-@tarea.IdTarea" @(tarea.IsComplete ? "checked" : "") />
                         <span class="todo-title">@tarea.Titulo</span>
                     </label>
                 </div>
-               
-                <div class="col-1 d-flex">                
-                    <button class="btn btn-light ml-auto btn-delete" onclick="location.href='@Url.Action("Delete", "Home", new { id = tarea.IdTarea })'">
+
+                <div class="col-1 d-flex">
+                    <button class="btn btn-light ml-auto btn-delete" data-task-id="@tarea.IdTarea">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>
@@ -48,47 +50,19 @@
         }
     </div>
 
+    <script type="text/javascript">
+    var eliminarTareaUrl = '@Url.Action("EliminarTarea", "Home")';
+    var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val();
+    </script>
+
+    @Scripts.Render("~/bundles/funciones")
+
+    @Html.AntiForgeryToken()
+    <script type="text/javascript">
+        var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val();
+    </script>
 
 </body>
+
 </html>
 
-<script type="text/javascript">
-// Activar el modo de edición al hacer clic en el botón de editar
-$('.btn-edit').on('click', function(e) {
-    e.preventDefault(); // Prevenir la acción por defecto del botón
-
-    var $title = $(this).closest('.todo-task').find('.todo-title'); // Encontrar el elemento del título
-    var currentText = $title.text(); // Obtener el texto actual
-    $title.replaceWith(`<input type="text" class="form-control todo-edit" value="${currentText}"/>`); // Reemplazar por un input
-
-    // Poner el foco en el input y seleccionar el texto
-    var $input = $(this).closest('.todo-task').find('.todo-edit');
-    $input.focus();
-    $input.select();
-
-    // Manejar el evento Enter para guardar los cambios
-    $input.on('keypress', function(e) {
-        if (e.which == 13) { // Código ASCII de Enter
-            var newText = $(this).val(); // Obtener el nuevo texto
-            var taskId = $(this).closest('.todo-task').data('task-id'); // Suponiendo que haya un atributo data-task-id con el ID
-            updateTaskTitle(taskId, newText); // Función para actualizar el título
-        }
-    });
-});
-
-// Función para enviar el nuevo título al servidor
-function updateTaskTitle(taskId, title) {
-    $.ajax({
-        url: '@Url.Action("Edit", "Home")', // Ruta del método del controlador para editar
-        type: 'POST',
-        data: { id: taskId, newTitle: title },
-        success: function(response) {
-            // Manejar la respuesta del servidor
-            // Reemplazar el input por el nuevo título, u otro tipo de notificación
-        },
-        error: function() {
-            // Manejar errores
-        }
-    });
-}
-</script>

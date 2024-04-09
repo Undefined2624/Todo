@@ -42,6 +42,10 @@ html, body {
     font-style: italic;
 }
 
+input:focus {
+    outline: none;
+}
+
 #BtnAgregar {
     position: absolute;
     height: 50px;

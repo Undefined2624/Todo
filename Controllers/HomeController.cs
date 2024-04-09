@@ -18,18 +18,20 @@ namespace ToDo.Controllers
             return View(tareas);
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult EliminarTarea(int idTarea)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            bool resultado = new CN_Tarea().EliminarTarea(idTarea);
+            return Json(new { success = resultado });
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public JsonResult AgregarTarea(string titulo)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            bool resultado = new CN_Tarea().AgregarTarea(new Tareas { Titulo = titulo, IsComplete = false });
+            return Json(new { success = resultado });
         }
+
     }
 }
