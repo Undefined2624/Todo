@@ -20,7 +20,7 @@
 <body>
     <div class="portada">
         <div class="Titulo">
-            <h1>To Do List </h1>
+            <h1>To Do</h1>
         </div>
         <div class="txtNuevaTarea">
             <input type="text" id="txtNuevaTarea" placeholder="Crea una nueva tarea 📝">
@@ -32,22 +32,38 @@
     <div class="todo-list-container">
         @foreach (var tarea in Model)
         {
+<<<<<<< HEAD
             <div class="row todo-task m-lg-0" id="task-@tarea.IdTarea">
 
                 <div class="col-11 d-flex">
+=======
+            <div class="row todo-task m-lg-0">
+                <div class="col-8 d-flex">
+>>>>>>> 60f8415f0ccd41084ba72d861731f764281682d9
                     <label class="form-check-label form-check-inline">
                         <input type="checkbox" class="form-check-input" id="check-@tarea.IdTarea" @(tarea.IsComplete ? "checked" : "") />
                         <span class="todo-title">@tarea.Titulo</span>
                     </label>
                 </div>
+<<<<<<< HEAD
 
                 <div class="col-1 d-flex">
                     <button class="btn btn-light ml-auto btn-delete" data-task-id="@tarea.IdTarea">
+=======
+                <div class="col-2 d-flex">
+                    <span class="todo-date ml-auto">@tarea.FechaCreacion.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="col-2 d-flex">
+                    <button class="btn btn-light ml-auto btn-edit" onclick="location.href='@Url.Action("Delete", "Home", new { id = tarea.IdTarea })'">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-light ml-auto btn-delete" onclick="location.href='@Url.Action("Delete", "Home", new { id = tarea.IdTarea })'">
+>>>>>>> 60f8415f0ccd41084ba72d861731f764281682d9
                         <i class="fa fa-trash"></i>
                     </button>
-                </div>
-            </div>
-        }
+                </div>                
+            </div>   
+          }
     </div>
 
     <script type="text/javascript">
@@ -63,6 +79,10 @@
     </script>
 
 </body>
+<<<<<<< HEAD
 
 </html>
 
+=======
+</html>
+>>>>>>> 60f8415f0ccd41084ba72d861731f764281682d9
