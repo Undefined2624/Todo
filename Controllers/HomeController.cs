@@ -33,5 +33,13 @@ namespace ToDo.Controllers
             return Json(new { success = resultado });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult CambiarEstadoTarea(int id, bool estado)
+        {
+            bool resultado = new CN_Tarea().CambiarEstadoTarea(id, estado);
+            return Json(new { success = resultado });
+        }
+
     }
 }

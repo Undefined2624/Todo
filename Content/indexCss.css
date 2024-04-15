@@ -38,6 +38,7 @@ html, body {
     border: none;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    font-size: 20px;
 }
 
 input:focus {
@@ -76,12 +77,9 @@ span{
 }
 
 .todo-title {
-    font-size: 15px;
+    font-size: 18px;
 }
 
-.todo-date {
-    font-size: 13px; 
-}
 
 .row{
     display: flex;
@@ -128,7 +126,6 @@ span{
         border: none;
     }
 
-
     .todo-task:hover .btn-delete {
         visibility: visible;
         opacity: 1;
@@ -149,21 +146,6 @@ span{
         background-color: transparent;
         border: none;
     }
-
-
-    .todo-task:hover .btn-edit {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .todo-task .btn-edit:hover .fa-edit {
-        color: #E67E22;
-    }
-
-    .todo-task .btn-edit .fa-edit {
-        color: #E67E22;
-    }
-
 
 /*Tachar texto*/
 

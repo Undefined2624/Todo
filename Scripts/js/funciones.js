@@ -29,13 +29,43 @@
         }
     });
 
+    $('.form-check-input').change(function () {
+        debugger;
+        var taskId = $(this).closest('.todo-task').attr('id').split('-')[1];
+        var estado = $(this).is(':checked');
+
+        $.ajax({
+            url: CambiarEstadoTareaUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: taskId,
+                estado: estado,
+                __RequestVerificationToken: antiForgeryToken
+            },
+            success: function (data) {
+                if (data.success) {
+                    console.log('Estado cambiado correctamente');
+                } else {
+                    alert('Error al cambiar estado');
+                }
+            },
+            error: function () {
+                alert('Error al cambiar estado');
+            }
+        });
+    });
+
+
 });
 
 function agregarTarea() {
+
     var titulo = $('#txtNuevaTarea').val();
-    if (titulo) { // Verifica que el título no esté vacío
+
+    if (titulo) { 
         $.ajax({
-            url: '/Home/AgregarTarea', // Asegúrate de que la ruta sea correcta
+            url: '/Home/AgregarTarea',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -43,11 +73,15 @@ function agregarTarea() {
                 __RequestVerificationToken: antiForgeryToken
             },
             success: function (data) {
+
                 if (data.success) {
-                    // Puedes agregar la nueva tarea al DOM aquí o recargar la parte de la lista
-                    location.reload(); // Esto es solo una simplificación
+                 
+                    location.reload(); 
+
                 } else {
+
                     alert('Error al agregar la tarea');
+
                 }
             },
             error: function () {
@@ -58,3 +92,5 @@ function agregarTarea() {
         alert('Por favor ingrese un título para la tarea');
     }
 }
+
+
