@@ -25,13 +25,15 @@ namespace ToDo.Controllers
             bool resultado = new CN_Tarea().EliminarTarea(idTarea);
             return Json(new { success = resultado });
         }
-
+      
         [HttpPost]
         public JsonResult AgregarTarea(string titulo)
         {
-            bool resultado = new CN_Tarea().AgregarTarea(new Tareas { Titulo = titulo, IsComplete = false });
-            return Json(new { success = resultado });
+            var nuevaTarea = new Tareas { Titulo = titulo, IsComplete = false };
+            var resultado = new CN_Tarea().AgregarTarea(nuevaTarea);
+            return Json(new { success = resultado, idTarea = nuevaTarea.IdTarea });
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

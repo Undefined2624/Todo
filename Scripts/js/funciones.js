@@ -10,11 +10,11 @@
                 dataType: 'json',
                 data: {
                     idTarea: taskId,
-                    __RequestVerificationToken: antiForgeryToken // Enviar el token aquí
+                    __RequestVerificationToken: antiForgeryToken 
                 },
                 success: function (data) {
                     if (data.success) {
-                        // Remueve la tarea del DOM
+                        
                         $('#task-' + taskId).remove();
                         alert('Tarea eliminada correctamente');
                     } else {
@@ -59,11 +59,29 @@
 
 });
 
+
+function construirTareaHTML(tarea) {
+    return `
+        <div class="row todo-task m-lg-0" id="task-${tarea.idTarea}">
+            <div class="col-11 d-flex">
+                <label class="form-check-label form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="check-${tarea.idTarea}" ${tarea.isComplete ? "checked" : ""} />
+                    <span class="todo-title">${tarea.titulo}</span>
+                </label>
+            </div>
+            <div class="col-1 d-flex">
+                <button class="btn btn-light ml-auto btn-delete" data-task-id="${tarea.idTarea}">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>                
+        </div>
+    `;
+}
+
 function agregarTarea() {
+    var titulo = $('#txtNuevaTarea').val().trim();
 
-    var titulo = $('#txtNuevaTarea').val();
-
-    if (titulo) { 
+    if (titulo) {
         $.ajax({
             url: '/Home/AgregarTarea',
             type: 'POST',
@@ -73,15 +91,17 @@ function agregarTarea() {
                 __RequestVerificationToken: antiForgeryToken
             },
             success: function (data) {
-
                 if (data.success) {
-                 
-                    location.reload(); 
-
+                    
+                    var nuevaTareaHTML = construirTareaHTML({
+                        idTarea: data.idTarea, 
+                        titulo: titulo,
+                        isComplete: false
+                    });
+                    $('.todo-list-container').append(nuevaTareaHTML);
+                    $('#txtNuevaTarea').val(''); 
                 } else {
-
                     alert('Error al agregar la tarea');
-
                 }
             },
             error: function () {
