@@ -8,7 +8,7 @@
     });
 
     $('.todo-list-container').on('click', '.btn-delete', function () {
-        debugger;
+      
         var taskId = $(this).data('task-id');
 
         if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
@@ -39,8 +39,6 @@
 
     $('.todo-list-container').on('change', '.form-check-input', function () {
 
-        debugger;
-       
         var taskId = $(this).closest('.todo-task').attr('id').split('-')[1];
         var estado = $(this).is(':checked');
 
@@ -71,8 +69,6 @@
 
 function construirTareaHTML(tarea) {
 
-    debugger;
-  
     return `
         <div class="row todo-task m-lg-0" id="task-${tarea.idTarea}">
             <div class="col-11 d-flex">
